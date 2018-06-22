@@ -1445,6 +1445,41 @@ void Change(void)
 	if (MY_DESK[0][7] == 61) King(307, 512 - 128, 255, 255, 255);
 }
 
+void Display(void)
+{
+	glClearColor(1, 1, 0.6, 0); //цвет фона
+	glClear(GL_COLOR_BUFFER_BIT);
+	Desk();
+	Change();
+	Peshka(370, 380, 0, 0, 0); //закрепленная фигура черной пешки
+	if (how_many_peshka1 != 8)Peshka(422, 380, 255, 255, 255); //присваивание координат для белой пешки
+	Ladia(367, 345, 0, 0, 0);
+	if (how_many_ladia1 != 2)Ladia(419, 345, 255, 255, 255);
+	Ferz(370, 310, 0, 0, 0);
+	if (how_many_ferz1 != 1)Ferz(422, 310, 255, 255, 255);
+	Kon(370, 275, 0, 0, 0);
+	if (how_many_kon1 != 2)Kon(422, 275, 255, 255, 255);
+	Slon(370, 240, 0, 0, 0);
+	if (how_many_slon1 != 2)Slon(422, 240, 255, 255, 255);
+	King(370, 200, 0, 0, 0);
+	if (how_many_king1 != 1)King(422, 200, 255, 255, 255);
+
+	if (how_many_peshka == 8)  Peshka(370, 380, 255, 0, 0); //закрашивание в красный цвет белых фигур
+	if (how_many_ferz == 1) Ferz(370, 310, 255, 0, 0);
+	if (how_many_kon == 2) Kon(370, 275, 255, 0, 0);
+	if (how_many_slon == 2) Slon(370, 240, 255, 0, 0);
+	if (how_many_ladia == 2) Ladia(367, 345, 255, 0, 0);
+	if (how_many_king == 1) King(370, 200, 255, 0, 0);
+
+	if (how_many_peshka1 == 8)  Peshka(422, 380, 255, 0, 0); //закрашивание в красный цвет черных фигур
+	if (how_many_ferz1 == 1) Ferz(422, 310, 255, 0, 0);
+	if (how_many_kon1 == 2) Kon(422, 275, 255, 0, 0);
+	if (how_many_slon1 == 2) Slon(422, 240, 255, 0, 0);
+	if (how_many_ladia1 == 2) Ladia(419, 345, 255, 0, 0);
+	if (how_many_king1 == 1) King(422, 200, 255, 0, 0);
+
+	glutSwapBuffers(); //Делается это для получения плавной анимации и для того, чтобы не было эффекта мерцания экрана
+}
 
 void main(int argc, char *argv[])
 {
