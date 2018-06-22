@@ -3603,3 +3603,39 @@ void mouseButton(int button, int state, int x, int y)
 	Display();
 
 }
+void processSpecialKeys(int key, int x, int y)
+{
+	if (key == GLUT_KEY_RIGHT) flag = 1;
+}
+void Reshape(GLint w, GLint h)
+{
+	Width = w;
+	Height = h;
+	glViewport(0, 0, w, h); // содержимое доски и фигур в окне (перемещение поступательно)
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, w, 0, h, -1.0, 1.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+void Keyboard(unsigned char key, int x, int y)
+{
+#define ESCAPE '\033'
+
+	if (key == ESCAPE)
+		exit(0);
+}
+void main(int argc, char *argv[])
+{
+	glutInit(&argc, argv); //Для инициализации библиотеки GLUT в начале программы надо вызвать glutInit (&argc, argv)
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); // Для задания режима дисплея вызывается glutInitDisplayMode (режим), где режим может принимать значения (GLUT_DOUBLE | GLUT_RGB) 
+	glutInitWindowSize(Width, Height); //Размеры окна задаются glutInitWindowSize (ширина, высота)
+	glutCreateWindow("Chess 13433/3"); //Создается окно функцией glutCreateWindow (заголовок_окна).
+	glutDisplayFunc(Display); // задает функцию рисования изображения
+	glutReshapeFunc(Reshape); // задает функцию обработки изменения размеров окна
+	glutKeyboardFunc(Keyboard); //задает функцию обработки нажатия клавиш клавиатуры
+	glutSpecialFunc(processSpecialKeys); //задает функцию обработки нажатия клавиш клавиатуры
+	glutMouseFunc(mouseButton); // задает функцию, обрабатывающую команды мыши
+	glShadeModel(GL_SMOOTH); // сглаживание фигуры
+	glutMainLoop();
+}
